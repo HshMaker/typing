@@ -76,12 +76,12 @@ app.post("/create", async function (req, res) {
   });
 
   if(userCheck?.signinId === idc) {
-    res.json({success : '이미 있는 회원정보입니다.'});
+    res.json({userStatus : '이미 있는 회원정보입니다.'});
     return;
   }
 
   else if(userName === '' || idc === '' || psc === '') {
-    res.json({success : '회원정보를 기입해주세요.'});
+    res.json({userStatus : '회원정보를 기입해주세요.'});
     return;
   }
 
@@ -89,7 +89,7 @@ app.post("/create", async function (req, res) {
     , signinId: idc
     , passWord: psc});
   
-  res.json({success : '회원가입이 완료되었습니다.'});
+  res.json({userStatus : '회원가입이 완료되었습니다.'});
 });
 
 app.post('/confirm', async function (req, res) {
@@ -97,19 +97,21 @@ app.post('/confirm', async function (req, res) {
 
   const userInfo = await Users.findOne({
     where: {
-      signinId: idc,
-      passWord: psc
+      signinId: idc
     }
   });
-  
-  if(userInfo?.signinId !== idc) {
-    res.json({success : '없는 회원정보입니다.'});
+  if(idc === '' || psc === '') {
+    res.json({userStatus : '회원정보를 기입해주세요.'});
+    return;
+  } else if(userInfo?.signinId !== idc) {
+    res.json({userStatus : '없는 회원정보입니다.'});
+    return;
+  } else if(userInfo?.signinId === idc && userInfo.passWord !== psc) {
+    res.json({userStatus : '비밀번호가 틀렸습니다.'});
     return;
   }
-
-  console.log(userInfo.userName);
   
-  res.json({username : userInfo.userName});
+  res.json({userStatus : '',userName : userInfo.userName});
 })
 
 

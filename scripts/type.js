@@ -7,15 +7,26 @@ let typeValue;
 let random;
 let score = 0;
 
+getWords();
+wordSet();  
 
-fetch(`http://localhost:8080/words`)
-    .then((response) => response.json())
-    .then((data) => {
-        typeValue = data;
-        console.log(typeValue.length);
+function getWords() {
+    fetch(`http://localhost:8080/words`)
+        .then((response) => response.json())
+        .then((data) => {
+            typeValue = data;
+            console.log(typeValue.length);
+
+        })
+}
+function wordSet() {
+    setTimeout(function () {
         random = Math.floor(Math.random() * typeValue.length);
+        console.log(random + typeValue[random]);
         wordsOne.innerText = typeValue[random];
-    })
+    }, 100);
+}
+
 
 typeInput.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
@@ -25,6 +36,8 @@ typeInput.addEventListener("keyup", function (event) {
         typeInput.value = "";
     }
 });
+
+
 
 function correctValue() {
     if (wordsOne.innerText === typeInput.value) {

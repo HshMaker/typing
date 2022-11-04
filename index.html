@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css">
-    <title>typing</title>
-  </head>
-  <body>
-    <h1 id="welcome"></h1>
-    <div class="login">
-      <div class="sign-in">
-        <form id="signinForm">
-          <input id="login-id" type="text" name="idc"> <br>
-          <input id="login-password" type="password" name="psc"> <br>
-          <br>
-          <button id="signInID" type="submit">로그인</button>
-        </form>
-      </div>
-      <br>
-      <div class="sign-up">
-        <form id="signupForm">
-          <input id="username" type="text" name="userName"> <br>
-          <input id="signup-id" type="text" name="idc"> <br>
-          <input id="signup-password" type="password" name="psc"> <br>
-          <br>
-          <button id="signUpID" type="submit">회원 가입</button>
-        </form>
-      </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>typing</title>
+</head>
+
+<body>
+  <div class="custom"></div>
+  <div class="login">
+    <div class="sign-in">
+      <form id="signinForm">
+        <input id="login-id" type="text" name="idc"> <br>
+        <input id="login-password" type="password" name="psc"> <br>
+        <p id="alert"></p>
+        <button id="signInID" type="submit">로그인</button>
+      </form>
     </div>
-    <script type="text/javascript" src="scripts/login.js"></script>
-  </body>
+    <br>
+    <div class="sign-up">
+      <form id="signupForm">
+        <input id="username" type="text" name="userName"> <br>
+        <input id="signup-id" type="text" name="idc"> <br>
+        <input id="signup-password" type="password" name="psc"> <br>
+        <br>
+        <button id="signUpID" type="submit">회원 가입</button>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript" src="scripts/login.js"></script>
+</body>
+
 </html>
