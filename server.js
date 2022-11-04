@@ -3,16 +3,14 @@ const app = express();
 const fs = require("fs");
 const cors = require("cors");
 let words;
-let loginInfo = [];
 
 const { Sequelize, DataTypes } = require('sequelize');
-const { table } = require("console");
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: 'database.sqlite'
 });
 
-const User = sequelize.define('User', {
+const Users = sequelize.define('Users', {
   // Model attributes are defined here
   userName : {
     type: DataTypes.STRING,
@@ -31,7 +29,7 @@ const User = sequelize.define('User', {
 });
 
 (async () => {
-  await User.sync();
+  await Users.sync();
 })();
 
 app.use(express.json())
@@ -67,27 +65,65 @@ app.get("/score/:score", function (req, res) {
   res.json({ value: value.score });
 });
 
-app.post("/login", async function (req, res) {
+app.post("/create", async function (req, res) {
   const { userName, idc, psc } = req.body;
 
-  const userInfo = await User.create({ userName: userName
+  const userCheck = await Users.findOne({
+    where: {
+      signinId: idc,
+    }
+    
+  });
+
+  if(userCheck?.signinId === idc) {
+    res.json({success : '이미 있는 회원정보입니다.'});
+    return;
+  }
+
+  else if(userName === '' || idc === '' || psc === '') {
+    res.json({success : '회원정보를 기입해주세요.'});
+    return;
+  }
+
+  const userInfo = await Users.create({ userName: userName
     , signinId: idc
     , passWord: psc});
-  console.log("Jane's auto-generated ID:", userInfo.id);
-
-  res.redirect('http://127.0.0.1:5500/typing/index.html');
+  
+  res.json({success : '회원가입이 완료되었습니다.'});
 });
 
-app.post("/delete/:id", async function (req, res) {
+app.post('/confirm', async function (req, res) {
+  const {idc, psc} = req.body;
+
+  const userInfo = await Users.findOne({
+    where: {
+      signinId: idc,
+      passWord: psc
+    }
+  });
+  
+  if(userInfo?.signinId !== idc) {
+    res.json({success : '없는 회원정보입니다.'});
+    return;
+  }
+
+  console.log(userInfo.userName);
+  
+  res.json({username : userInfo.userName});
+})
+
+
+app.get("/delete/:id", async function (req, res) {
   console.log(req.params);
 
   const {id} = req.params;
 
-  res.redirect('http://127.0.0.1:5500/typing/index.html');
+  //delete문
 
-});
+  await Users.destroy({
+    where: {
+      id: id
+    }
+  })
 
-app.get("/userid", async function (req, res) {
-  const a = await User.findAll();
-  console.log(a.id);
 });

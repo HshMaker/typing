@@ -8,21 +8,24 @@
     <title>typing</title>
   </head>
   <body>
+    <h1 id="welcome"></h1>
     <div class="login">
       <div class="sign-in">
-        <input id="login-id" type="text"> <br>
-        <input id="login-password" type="text"> <br>
-        <br>
-        <button onclick="getSignIn()">로그인</button>
+        <form id="signinForm">
+          <input id="login-id" type="text" name="idc"> <br>
+          <input id="login-password" type="password" name="psc"> <br>
+          <br>
+          <button id="signInID" type="submit">로그인</button>
+        </form>
       </div>
       <br>
       <div class="sign-up">
-        <form action="http://localhost:8080/login" method="post">
+        <form id="signupForm">
           <input id="username" type="text" name="userName"> <br>
           <input id="signup-id" type="text" name="idc"> <br>
-          <input id="signup-password" type="text" name="psc"> <br>
+          <input id="signup-password" type="password" name="psc"> <br>
           <br>
-          <input onsubmit="getUser()" type="submit" value="Submit">
+          <button id="signUpID" type="submit">회원 가입</button>
         </form>
       </div>
     </div>
