@@ -1,14 +1,16 @@
 const typeInput = document.getElementById("typing-value");
 const wordsOne = document.getElementById("content");
 const scoreText = document.getElementById("score");
+const humanAlertText = document.querySelector('.human-alert');
+const playerinfo = document.querySelector('#player-info');
+const scoreForm = document.querySelector('#game-score-form');
 
-let loginStatus = false;
 let typeValue;
 let random;
 let score = 0;
 
 getWords();
-wordSet();  
+wordSet();
 
 function getWords() {
     fetch(`http://localhost:8080/words`)
@@ -32,18 +34,20 @@ typeInput.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
         correctValue();
-        getValue();
         typeInput.value = "";
     }
 });
+playerinfo.addEventListener('keydown', function (event) {
+    event.preventDefault();
+    if(playerinfo.value !== userIDGame) {
+        playerinfo.value = userIDGame;
+    }
+})
 
-
-
-function correctValue() {
+async function correctValue() {
     if (wordsOne.innerText === typeInput.value) {
         console.log('correct!');
-        score++;
-        scoreText.innerText = `SCORE : ${score}`;
+        await getValue();
         random = Math.floor(Math.random() * typeValue.length);
         wordsOne.innerText = typeValue[random];
     } else {
@@ -52,10 +56,21 @@ function correctValue() {
     }
 }
 
+const scoreData = new FormData(scoreForm);
+const scoreBody = new URLSearchParams(scoreData);
+
 function getValue() {
-    fetch(`http://localhost:8080/score/${score}`)
+    fetch(`http://localhost:8080/score`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: scoreBody
+    })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            score = data.score;
+            scoreText.innerText = `${userNameGame} 님의 스코어 : ${score}`;
+
         });
 }

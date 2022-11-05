@@ -10,6 +10,8 @@ const sequelize = new Sequelize({
   storage: 'database.sqlite'
 });
 
+app.set('view engine', 'ejs');
+
 const Users = sequelize.define('Users', {
   // Model attributes are defined here
   userName : {
@@ -22,6 +24,10 @@ const Users = sequelize.define('Users', {
   },
   passWord: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  gameScore: {
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {
@@ -50,19 +56,35 @@ app.listen(8080, function () {
 });
 
 app.get("/", function (req, res) {
-  res.send("메인 페이지 입니다.");
+  res.send('hi');
+});
+
+app.get("/dUdLrKeLffLxM", async function (req, res) {
+  const ids = await Users.findAll();
+  res.render('index', { ids : ids});
 });
 
 app.get("/words", function (req, res) {
   res.json(words);
 });
 
-app.get("/score/:score", function (req, res) {
-  const value = req.params;
+app.post("/score", async function (req, res) {
+  const { playerID } = req.body;
 
-  console.log(value.score);
-
-  res.json({ value: value.score });
+  const scoreCheck = await Users.findOne({
+    where: {
+      signinId: playerID
+    }
+    
+  });
+  const userScore = scoreCheck.gameScore + 1;
+  const playerCheck = await Users.update({gameScore: userScore}, {
+    where: {
+      signinId: playerID
+    }
+  })
+//여기 새로고침 이번에 한번 따로 나눠봐 백엔드
+  res.json({score: playerCheck.gameScore });
 });
 
 app.post("/create", async function (req, res) {
@@ -87,7 +109,8 @@ app.post("/create", async function (req, res) {
 
   const userInfo = await Users.create({ userName: userName
     , signinId: idc
-    , passWord: psc});
+    , passWord: psc
+    , gameScore: 0});
 
     setTimeout(function() {
       res.json({userStatus : '회원가입이 완료되었습니다.'});
@@ -113,11 +136,11 @@ app.post('/confirm', async function (req, res) {
     return;
   }
   
-  res.json({userStatus : '',userName : userInfo.userName});
+  res.json({userStatus : '',userName : userInfo.userName, ID : userInfo.signinId});
 })
 
 
-app.get("/delete/:id", async function (req, res) {
+app.post("/wLdNjwLdelete/:id", async function (req, res) {
   console.log(req.params);
 
   const {id} = req.params;
@@ -130,4 +153,5 @@ app.get("/delete/:id", async function (req, res) {
     }
   })
 
+  res.redirect('/dUdLrKeLffLxM');
 });

@@ -5,33 +5,48 @@ const signInAlertText = document.querySelector('#signinalert');
 const signUpAlertText = document.querySelector('#signupalert');
 
 let userNameGame = "";
+let userIDGame = "";
 
 class gameLogic extends HTMLElement {
 
     connectedCallback() {
         const h4 = document.createElement('h4');
+        const h1 = document.createElement('h1');
         const titleDiv = document.createElement('div');
         const contentH1 = document.createElement('h1');
         const hr = document.createElement('hr');
         const typingValueinput = document.createElement('input');
         const score = document.createElement('p');
+        const playerID = document.createElement('input');
+        const form = document.createElement('form');
         const logicDiv = document.createElement('div');
         const gameSceneDiv = document.createElement('div');
-
+    
         h4.innerText = 'Typing Game!';
+        h4.className = 'title-text';
+        h1.innerText = '';
+        h1.className = 'human-alert'
         titleDiv.className = 'title';
         titleDiv.appendChild(h4);
+        titleDiv.appendChild(h1);
         contentH1.id = 'content';
         typingValueinput.type = 'text';
         typingValueinput.id = 'typing-value';
         score.id = 'score';
-        score.innerText = 'SCORE : 0';
+        score.innerText = `${userNameGame} 님의 스코어 : 0`;
+        playerID.innerText = '';
+        playerID.name = 'playerID';
+        playerID.id = 'player-info'
+        playerID.value = userIDGame;
+        playerID.className = 'hide';
+        form.id = 'game-score-form';
+        form.appendChild(playerID);
         logicDiv.className = 'logic';
         logicDiv.appendChild(contentH1);
         logicDiv.appendChild(hr);
         logicDiv.appendChild(typingValueinput);
         logicDiv.appendChild(score);
-
+        logicDiv.appendChild(form);
         gameSceneDiv.className = 'gameScene';
         gameSceneDiv.appendChild(titleDiv);
         gameSceneDiv.appendChild(logicDiv);
@@ -55,7 +70,6 @@ document.addEventListener('submit', (e) => {
         const formDatas = new FormData(signInForm);
         const loginBody = new URLSearchParams(formDatas);
 
-
         fetch(`http://localhost:8080/confirm`, {
             method: 'POST',
             headers: {
@@ -69,6 +83,7 @@ document.addEventListener('submit', (e) => {
                     signInAlertText.innerHTML = data.userStatus;
                 } else {
                     signInAlertText.innerHTML = data.userStatus;
+                    userIDGame = data.ID;
                     userNameGame = data.userName;
                     loginClass.remove();
                     const gamelogicCST = document.createElement('custom-gamelogic');
