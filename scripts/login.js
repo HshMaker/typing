@@ -1,7 +1,9 @@
 const signInForm = document.querySelector('#signinForm');
 const signUpForm = document.querySelector('#signupForm');
 const loginClass = document.querySelector('.login');
-const alertText = document.querySelector('#alert');
+const signInAlertText = document.querySelector('#signinalert');
+const signUpAlertText = document.querySelector('#signupalert');
+
 let userNameGame = "";
 
 class gameLogic extends HTMLElement {
@@ -64,9 +66,9 @@ document.addEventListener('submit', (e) => {
             .then((response) => response.json())
             .then((data) => {
                 if (data?.userStatus === '없는 회원정보입니다.' || data?.userStatus === '비밀번호가 틀렸습니다.' || data?.userStatus === '회원정보를 기입해주세요.') {
-                    alertText.innerHTML = data.userStatus;
+                    signInAlertText.innerHTML = data.userStatus;
                 } else {
-                    alertText.innerHTML = data.userStatus;
+                    signInAlertText.innerHTML = data.userStatus;
                     userNameGame = data.userName;
                     loginClass.remove();
                     const gamelogicCST = document.createElement('custom-gamelogic');
@@ -96,9 +98,14 @@ document.addEventListener('submit', (e) => {
             },
             body: signUpBody
         })
-            .then((response) => response.json())
+            .then(async (response) => await response.json())
             .then((data) => {
-                return;
+                if(data.userStatus === '이미 있는 회원정보입니다.' || data.userStatus === '회원정보를 기입해주세요.') {
+                    signUpAlertText.innerHTML = data.userStatus;
+                    return;
+                } else {
+                    signUpAlertText.innerHTML = data.userStatus;
+                }
             })
     }
 

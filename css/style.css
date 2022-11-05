@@ -1,3 +1,33 @@
-#hide {
-    display: none;
+.login {
+    text-align: center;
+    margin-top: 200px;
+    
+}
+.basicinput {
+    
+    padding: 10px;
+    width: 300px;
+    height: 20px;
+    border-color: rgb(23, 255, 35);
+    margin-bottom: 3px;
+}
+
+
+.basicbutton {
+    width: 325px;
+    height: 30px;
+    margin-top: 10px;
+    background: rgb(100, 255, 116);
+    border-color: rgb(23, 255, 35);
+    cursor: pointer;
+    
+}
+.basicbutton:hover {
+    background: rgb(26, 228, 46);
+    border-color: rgb(23, 255, 35);
+}
+
+#signinalert {
+    margin-top: 5px;
+    margin-bottom: 0px;
 }

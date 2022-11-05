@@ -88,8 +88,10 @@ app.post("/create", async function (req, res) {
   const userInfo = await Users.create({ userName: userName
     , signinId: idc
     , passWord: psc});
-  
-  res.json({userStatus : '회원가입이 완료되었습니다.'});
+
+    setTimeout(function() {
+      res.json({userStatus : '회원가입이 완료되었습니다.'});
+    }, 1000)
 });
 
 app.post('/confirm', async function (req, res) {
