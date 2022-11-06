@@ -11,9 +11,10 @@ body {
     border-radius: 1ch;
 }
 .login-title {
-    width: 351px;
+    width: 352px;
     margin: 0 auto;
     margin-top: -1px;
+    margin-left: -1px;
     text-align: center;
     font-size: 40px;
     color: rgb(251, 255, 173);

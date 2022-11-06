@@ -21,7 +21,19 @@ class gameLogic extends HTMLElement {
         const form = document.createElement('form');
         const logicDiv = document.createElement('div');
         const gameSceneDiv = document.createElement('div');
-    
+        const leaderBoardDiv = document.createElement('div');
+        const scoreList = document.createElement('ol');
+        const score1 = document.createElement('li');
+        const score2 = document.createElement('li');
+        const score3 = document.createElement('li');
+        const score4 = document.createElement('li');
+        const score5 = document.createElement('li');
+        const score6 = document.createElement('li');
+        const score7 = document.createElement('li');
+        const score8 = document.createElement('li');
+        const score9 = document.createElement('li');
+        const score10 = document.createElement('li');
+
         h4.innerText = 'Typing Game!';
         h4.className = 'title-text';
         h1.innerText = '';
@@ -47,12 +59,25 @@ class gameLogic extends HTMLElement {
         logicDiv.appendChild(typingValueinput);
         logicDiv.appendChild(score);
         logicDiv.appendChild(form);
+        score1.className = 'leader1';
+        score2.className = 'leader2';
+        score3.className = 'leader3';
+        score4.className = 'leader4';
+        score5.className = 'leader5';
+        score6.className = 'leader6';
+        score7.className = 'leader7';
+        score8.className = 'leader8';
+        score9.className = 'leader9';
+        score10.className = 'leader10';
+        leaderBoardDiv.className = 'leaderBoard';
+        leaderBoardDiv.append(score1, score2, score3, score4, score5, score6, score7, score8, score9, score10);
         gameSceneDiv.className = 'gameScene';
         gameSceneDiv.appendChild(titleDiv);
         gameSceneDiv.appendChild(logicDiv);
+        gameSceneDiv.appendChild(leaderBoardDiv);
         this.appendChild(gameSceneDiv);
-        
-        
+
+
     }
 }
 
@@ -62,7 +87,7 @@ customElements.define("custom-gamelogic", gameLogic);
 document.addEventListener('submit', (e) => {
     if (e.submitter.id === 'signInID') {
         if (e.keyCode === 13) {
-            e.preventDefault(); 
+            e.preventDefault();
             return;
         }
         e.preventDefault();
@@ -92,13 +117,13 @@ document.addEventListener('submit', (e) => {
                     script.type = 'text/javascript';
                     script.src = 'scripts/type.js';
                     document.body.appendChild(script);
-                                      
+
                 }
             })
 
     } else if (e.submitter.id === 'signUpID') {
         if (e.keyCode === 13) {
-            e.preventDefault(); 
+            e.preventDefault();
             return;
         }
         e.preventDefault();
@@ -113,9 +138,9 @@ document.addEventListener('submit', (e) => {
             },
             body: signUpBody
         })
-            .then(async (response) => await response.json())
+            .then((response) => response.json())
             .then((data) => {
-                if(data.userStatus === '이미 있는 회원정보입니다.' || data.userStatus === '회원정보를 기입해주세요.') {
+                if (data.userStatus === '이미 있는 회원정보입니다.' || data.userStatus === '회원정보를 기입해주세요.') {
                     signUpAlertText.innerHTML = data.userStatus;
                     return;
                 } else {

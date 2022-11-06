@@ -4,6 +4,18 @@ const scoreText = document.getElementById("score");
 const humanAlertText = document.querySelector('.human-alert');
 const playerinfo = document.querySelector('#player-info');
 const scoreForm = document.querySelector('#game-score-form');
+const leaderBoardv = [
+    document.querySelector('.leader1'),
+    document.querySelector('.leader2'),
+    document.querySelector('.leader3'),
+    document.querySelector('.leader4'),
+    document.querySelector('.leader5'),
+    document.querySelector('.leader6'),
+    document.querySelector('.leader7'),
+    document.querySelector('.leader8'),
+    document.querySelector('.leader9'),
+    document.querySelector('.leader10'),
+]
 
 let typeValue;
 let random;
@@ -11,6 +23,14 @@ let score = 0;
 
 getWords();
 wordSet();
+setTimeout(function () {
+    scoreLoad();
+}
+, 50)
+leaderBoardLoad();
+setInterval(function() {
+    leaderBoardLoad();
+}, 10000)
 
 function getWords() {
     fetch(`http://localhost:8080/words`)
@@ -73,4 +93,29 @@ function getValue() {
             scoreText.innerText = `${userNameGame} 님의 스코어 : ${score}`;
 
         });
+}
+function scoreLoad() {
+    fetch(`http://localhost:8080/loadscore`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: scoreBody
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                score = data.score;
+                scoreText.innerText = `${userNameGame} 님의 스코어 : ${score}`;
+    
+            })
+}
+function leaderBoardLoad() {
+    fetch(`http://localhost:8080/leaderBoard`)
+            .then((response) => response.json())
+            .then((data) => {
+                for(i = 0; i<leaderBoardv.length; i++) {
+                    leaderBoardv[i].innerText = `${(i+1)}등 ${data[i]?.userName} : ${data[i]?.gameScore}점`;
+
+                }
+            })
 }
