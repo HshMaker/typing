@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="favicon.png">
   <link rel="stylesheet" href="css/style.css">
   <title>typing</title>
 </head>
@@ -15,8 +16,8 @@
     <h2 class="login-title">TYPING</h2>
     <div class="sign-in">
       <form id="signinForm">
-        <input class="basicinput" id="login-id" type="text" name="idc" placeholder="아이디를 입력하세요"> <br>
-        <input class="basicinput" id="login-password" type="password" name="psc" placeholder="비밀번호를 입력하세요"> <br>
+        <input class="basicinput" maxlength="15" id="login-id" type="text" name="idc" placeholder="아이디를 입력하세요"> <br>
+        <input class="basicinput" maxlength="15" id="login-password" type="password" name="psc" placeholder="비밀번호를 입력하세요"> <br>
         <p id="signinalert"></p>
         <button class="basicbutton" id="signInID" type="submit">로그인</button>
       </form>
@@ -24,9 +25,9 @@
     <br>
     <div class="sign-up">
       <form id="signupForm">
-        <input class="basicinput" id="username" type="text" name="userName" placeholder="닉네임을 입력하세요"> <br>
-        <input class="basicinput" id="signup-id" type="text" name="idc" placeholder="아이디를 입력하세요"> <br>
-        <input class="basicinput" id="signup-password" type="password" name="psc" placeholder="비밀번호를 입력하세요"> <br>
+        <input class="basicinput" maxlength="10" id="username" type="text" name="userName" placeholder="닉네임을 입력하세요"> <br>
+        <input class="basicinput" maxlength="15" id="signup-id" type="text" name="idc" placeholder="아이디를 입력하세요"> <br>
+        <input class="basicinput" maxlength="15" id="signup-password" type="password" name="psc" placeholder="비밀번호를 입력하세요"> <br>
         <p id="signupalert"></p>
         <button class="basicbutton" id="signUpID" type="submit">회원 가입</button>
       </form>

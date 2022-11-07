@@ -1,7 +1,13 @@
 body {
     background-color: rgb(253, 255, 223);
-
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    overflow: hidden;
 }
+
 .login {
     width: 350px;
     height: 440px;
@@ -10,6 +16,7 @@ body {
     border: 3px solid rgb(0, 214, 11);
     border-radius: 1ch;
 }
+
 .login-title {
     width: 352px;
     margin: 0 auto;
@@ -21,16 +28,18 @@ body {
     background-color: rgb(0, 214, 11);
 }
 
-.sign-in, .sign-up {
+.sign-in,
+.sign-up {
     margin-top: 15px;
     margin-left: 14px;
 }
+
 .sign-up {
     margin-top: 10px;
 }
 
 .basicinput {
-    
+
     padding: 10px;
     width: 300px;
     height: 20px;
@@ -38,8 +47,9 @@ body {
     border: 1px solid green;
     box-shadow: none;
     font-size: 1.5ch;
-    
+
 }
+
 .basicinput:focus {
     outline: 1px solid rgb(2, 73, 2);
 }
@@ -54,17 +64,178 @@ body {
     outline: 0.5px solid rgb(22, 145, 0);
     font-size: 17px;
     cursor: pointer;
-    
+
 }
+
 .basicbutton:hover {
     background: rgb(26, 228, 46);
     border-color: rgb(23, 255, 35);
 }
 
-#signinalert, #signupalert {
+#signinalert,
+#signupalert {
     margin: 0;
     font-size: 13px;
     color: rgb(255, 55, 55);
+}
+
+.gameScene {
+    position: fixed;
+    width: 600px;
+    height: 100%;
+    margin: 0 auto;
+    margin-left: 50%;
+    left: -300px;
+    border-left: 5px solid rgb(51, 51, 51);
+    border-right: 5px solid rgb(51, 51, 51);
+}
+
+.title {
+    width: 300px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+
+}
+
+.title-text {
+    width: 300px;
+    font-size: 40px;
+    color: rgb(251, 255, 173);
+    background-color: rgb(0, 214, 11);
+    border-radius: 5px;
+}
+
+.logic {
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.logic :nth-child(1) {
+    margin-top: -40px;
+    margin-bottom: -25px;
+    font-size: 50px;
+
+}
+
+.logic :nth-child(2) {
+    margin-top: 40px;
+}
+
+#typing-value {
+    width: 180px;
+    height: 23px;
+    position: absolute;
+    left: 50%;
+    margin-left: -92px;
+    margin-top: 250px;
+    text-align: center;
+    border: 1px solid rgb(0, 177, 9);
+    border-radius: 3px;
+}
+
+#score {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 100px;
+}
+
+.UuserNames {
+    font-size: 20px;
+}
+
+.leaderBoard {
+    display: flex;
+    height: 100px;
+    margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.leaderBoardOpen {
+    position: fixed;
+    display: inline-block;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.leaderContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.leaderBoard-Box {
+    width: 80%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255);
+}
+
+.leader-icon {
+    display: inline-block;
+    font-size: 27px;
+    font-weight: 650;
+    margin-left: 30px;
+    margin-top: 45px;
+}
+
+.leaderExit {
+    float: right;
+    margin-top: 40px;
+    padding-right: 10px;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.leaderList {
+    padding: 0;
+    margin-top: 45px;
+}
+
+.leaderText {
+    text-align: left;
+    font-size: 23px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 30px;
+    border-top: 1px solid rgb(196, 196, 196);
+}
+
+.leaderText:nth-child(4),
+.leaderText:nth-child(5),
+.leaderText:nth-child(6),
+.leaderText:nth-child(7),
+.leaderText:nth-child(8),
+.leaderText:nth-child(9) {
+    margin-left: 10px;
+}
+
+.leaderText:last-child {
+    border-bottom: 1px solid rgb(196, 196, 196);
+    margin-left: 4px;
+}
+
+.vibration {
+    animation: vibration 0.1s infinite;
+}
+
+@keyframes vibration {
+    from {
+        transform: rotate(2.5deg);
+    }
+
+    to {
+        transform: rotate(-2.5deg);
+    }
 }
 
 .hide {

@@ -3,6 +3,9 @@ const signUpForm = document.querySelector('#signupForm');
 const loginClass = document.querySelector('.login');
 const signInAlertText = document.querySelector('#signinalert');
 const signUpAlertText = document.querySelector('#signupalert');
+const signUpUsers = document.querySelector('#username');
+const signUpIDs = document.querySelector('#signup-id');
+const signUpPass = document.querySelector('#signup-password');
 
 let userNameGame = "";
 let userIDGame = "";
@@ -11,18 +14,22 @@ class gameLogic extends HTMLElement {
 
     connectedCallback() {
         const h4 = document.createElement('h4');
-        const h1 = document.createElement('h1');
         const titleDiv = document.createElement('div');
         const contentH1 = document.createElement('h1');
         const hr = document.createElement('hr');
         const typingValueinput = document.createElement('input');
         const score = document.createElement('p');
+        const userName = document.createElement('p');
         const playerID = document.createElement('input');
         const form = document.createElement('form');
         const logicDiv = document.createElement('div');
         const gameSceneDiv = document.createElement('div');
         const leaderBoardDiv = document.createElement('div');
+        const leaderBoardScoreDiv = document.createElement('div');
+        const leaderBoardContainDiv = document.createElement('div');
         const scoreList = document.createElement('ol');
+        const leaderSpan = document.createElement('span');
+        const leaderExitSpan = document.createElement('span');
         const score1 = document.createElement('li');
         const score2 = document.createElement('li');
         const score3 = document.createElement('li');
@@ -36,16 +43,15 @@ class gameLogic extends HTMLElement {
 
         h4.innerText = 'Typing Game!';
         h4.className = 'title-text';
-        h1.innerText = '';
-        h1.className = 'human-alert'
         titleDiv.className = 'title';
         titleDiv.appendChild(h4);
-        titleDiv.appendChild(h1);
         contentH1.id = 'content';
         typingValueinput.type = 'text';
         typingValueinput.id = 'typing-value';
         score.id = 'score';
-        score.innerText = `${userNameGame} 님의 스코어 : 0`;
+        score.innerText = `0`;
+        userName.classList.add('UuserNames');
+        userName.innerText = `${userNameGame}`;
         playerID.innerText = '';
         playerID.name = 'playerID';
         playerID.id = 'player-info'
@@ -54,27 +60,32 @@ class gameLogic extends HTMLElement {
         form.id = 'game-score-form';
         form.appendChild(playerID);
         logicDiv.className = 'logic';
-        logicDiv.appendChild(contentH1);
-        logicDiv.appendChild(hr);
-        logicDiv.appendChild(typingValueinput);
-        logicDiv.appendChild(score);
-        logicDiv.appendChild(form);
-        score1.className = 'leader1';
-        score2.className = 'leader2';
-        score3.className = 'leader3';
-        score4.className = 'leader4';
-        score5.className = 'leader5';
-        score6.className = 'leader6';
-        score7.className = 'leader7';
-        score8.className = 'leader8';
-        score9.className = 'leader9';
-        score10.className = 'leader10';
+        logicDiv.append(contentH1, hr, typingValueinput, userName, form, score);
+        leaderSpan.innerText = '🏆 순위';
+        leaderSpan.classList = 'leader-icon';
+        leaderExitSpan.innerText = '❌';
+        leaderExitSpan.classList = 'leaderExit';
+        score1.classList = 'leader1 leaderText';
+        score2.classList = 'leader2 leaderText';
+        score3.classList = 'leader3 leaderText';
+        score4.classList = 'leader4 leaderText';
+        score5.classList = 'leader5 leaderText';
+        score6.classList = 'leader6 leaderText';
+        score7.classList = 'leader7 leaderText';
+        score8.classList = 'leader8 leaderText';
+        score9.classList = 'leader9 leaderText';
+        score10.classList = 'leader10 leaderText';
+        scoreList.classList = 'leaderList';
+        scoreList.style = "list-style: none";
+        scoreList.append(score1, score2, score3, score4, score5, score6, score7, score8, score9, score10);
+        leaderBoardContainDiv.classList = 'leaderBoard-Box'
+        leaderBoardContainDiv.append(leaderSpan, leaderExitSpan, scoreList);
+        leaderBoardScoreDiv.classList = 'leaderContainer hide';
+        leaderBoardScoreDiv.append(leaderBoardContainDiv);
+        leaderBoardDiv.innerHTML = '<span class="leaderBoardOpen">🏆</span>';
         leaderBoardDiv.className = 'leaderBoard';
-        leaderBoardDiv.append(score1, score2, score3, score4, score5, score6, score7, score8, score9, score10);
         gameSceneDiv.className = 'gameScene';
-        gameSceneDiv.appendChild(titleDiv);
-        gameSceneDiv.appendChild(logicDiv);
-        gameSceneDiv.appendChild(leaderBoardDiv);
+        gameSceneDiv.append(titleDiv, logicDiv, leaderBoardDiv, leaderBoardScoreDiv);
         this.appendChild(gameSceneDiv);
 
 
@@ -145,6 +156,9 @@ document.addEventListener('submit', (e) => {
                     return;
                 } else {
                     signUpAlertText.innerHTML = data.userStatus;
+                    signUpUsers.value = '';
+                    signUpIDs.value = '';
+                    signUpPass.value = '';
                 }
             })
     }
