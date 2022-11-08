@@ -106,7 +106,7 @@ document.addEventListener('submit', (e) => {
         const formDatas = new FormData(signInForm);
         const loginBody = new URLSearchParams(formDatas);
 
-        fetch(`http://localhost:8080/confirm`, {
+        fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/confirm`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -142,7 +142,7 @@ document.addEventListener('submit', (e) => {
         const formDatass = new FormData(signUpForm);
         const signUpBody = new URLSearchParams(formDatass);
 
-        fetch(`http://localhost:8080/create`, {
+        fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

@@ -44,12 +44,10 @@ setTimeout(function () {
 , 50)
 
 function getWords() {
-    fetch(`http://localhost:8080/words`)
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/words`)
         .then((response) => response.json())
         .then((data) => {
             typeValue = data;
-            console.log(typeValue.length);
-
         })
 }
 function wordSet() {
@@ -84,7 +82,6 @@ leaderExit.addEventListener('click', function() {
 
 async function correctValue() {
     if (wordsOne.innerText === typeInput.value) {
-        console.log('correct!');
         await getValue();
         random = Math.floor(Math.random() * typeValue.length);
         wordsOne.innerText = typeValue[random];
@@ -100,7 +97,6 @@ async function correctValue() {
             pianoCount++;
         }
     } else {
-        console.log('incorrect!');
         return;
     }
 }
@@ -109,7 +105,7 @@ const scoreData = new FormData(scoreForm);
 const scoreBody = new URLSearchParams(scoreData);
 
 function getValue() {
-    fetch(`http://localhost:8080/score`, {
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/score`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -124,7 +120,7 @@ function getValue() {
         });
 }
 function scoreLoad() {
-    fetch(`http://localhost:8080/loadscore`, {
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/loadscore`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -139,7 +135,7 @@ function scoreLoad() {
             })
 }
 function leaderBoardLoad() {
-    fetch(`http://localhost:8080/leaderBoard`)
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/leaderBoard`)
             .then((response) => response.json())
             .then((data) => {
                 for(i = 0; i<leaderBoardv.length; i++) {
