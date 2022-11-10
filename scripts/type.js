@@ -7,6 +7,7 @@ const scoreForm = document.querySelector('#game-score-form');
 const leaderOpen = document.querySelector('.leaderBoardOpen');
 const leaderContainer = document.querySelector('.leaderContainer');
 const leaderExit = document.querySelector('.leaderExit');
+const chainNumSpan = document.querySelector('.chainNum');
 const leaderBoardv = [
     document.querySelector('.leader1'),
     document.querySelector('.leader2'),
@@ -20,9 +21,9 @@ const leaderBoardv = [
     document.querySelector('.leader10'),
 ]
 
+let chainNum = 0;
 let typeValue;
 let random;
-let score = 0;
 
 const pianoSound = [
     new Audio('sounds/piano1.mp3'),
@@ -33,8 +34,16 @@ const pianoSound = [
     new Audio('sounds/piano6.mp3'),
     new Audio('sounds/piano7.mp3'),
     new Audio('sounds/piano8.mp3'),
+    new Audio('sounds/piano9.mp3'),
+    new Audio('sounds/piano10.mp3'),
+    new Audio('sounds/piano11.mp3'),
+    new Audio('sounds/piano12.mp3'),
+    new Audio('sounds/piano13.mp3'),
 ]
 let pianoCount = 0;
+
+let scoreData = new FormData(scoreForm);
+let scoreBody = new URLSearchParams(scoreData);
 
 getWords();
 wordSet();
@@ -44,7 +53,7 @@ setTimeout(function () {
 , 50)
 
 function getWords() {
-    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/words`)
+    fetch(`http://localhost:8080/words`)
         .then((response) => response.json())
         .then((data) => {
             typeValue = data;
@@ -81,7 +90,7 @@ leaderExit.addEventListener('click', function() {
 })
 
 async function correctValue() {
-    if (wordsOne.innerText === typeInput.value) {
+    if (wordsOne.innerText === typeInput.value) { //correct
         await getValue();
         random = Math.floor(Math.random() * typeValue.length);
         wordsOne.innerText = typeValue[random];
@@ -96,31 +105,16 @@ async function correctValue() {
             pianoSound[pianoCount].play();
             pianoCount++;
         }
-    } else {
-        return;
-    }
-}
-
-const scoreData = new FormData(scoreForm);
-const scoreBody = new URLSearchParams(scoreData);
-
-function getValue() {
-    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/score`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: scoreBody
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            score = data.score;
-            scoreText.innerText = score;
-
-        });
-}
-function scoreLoad() {
-    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/loadscore`, {
+    } else { //incorrect
+        random = Math.floor(Math.random() * 5) + 8;
+        pianoSound[random].play();
+        wordsOne.classList.add('vibration');
+        setTimeout(function() {
+            wordsOne.classList.remove('vibration');
+        }, 100);
+        scoreData = new FormData(scoreForm);
+        scoreBody = new URLSearchParams(scoreData);
+        await fetch(`http://localhost:8080/chainzero`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -129,13 +123,41 @@ function scoreLoad() {
         })
             .then((response) => response.json())
             .then((data) => {
-                score = data.score;
-                scoreText.innerText = score;
-    
+                chainNumSpan.innerText = data.chain;
+            });
+    }
+}
+
+function getValue() {
+    fetch(`http://localhost:8080/score`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: scoreBody
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            scoreText.innerText = data.score;
+            chainNumSpan.innerText = data.chain;
+        });
+}
+function scoreLoad() {
+    fetch(`http://localhost:8080/loadscore`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: scoreBody
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                scoreText.innerText = data.score;
+                chainNumSpan.innerText = data.chain;
             })
 }
 function leaderBoardLoad() {
-    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/leaderBoard`)
+    fetch(`http://localhost:8080/leaderBoard`)
             .then((response) => response.json())
             .then((data) => {
                 for(i = 0; i<leaderBoardv.length; i++) {
@@ -155,3 +177,4 @@ function leaderBoardLoad() {
                 }
             })
 }
+
