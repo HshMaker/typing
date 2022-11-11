@@ -27,11 +27,13 @@ class gameLogic extends HTMLElement {
         const gameSceneDiv = document.createElement('div');
         const leaderBoardDiv = document.createElement('div');
         const leaderBoardScoreDiv = document.createElement('div');
+        const chainNumDiv = document.createElement('div');
         const leaderBoardContainDiv = document.createElement('div');
         const scoreList = document.createElement('ol');
         const leaderSpan = document.createElement('span');
         const leaderExitSpan = document.createElement('span');
         const chainNum = document.createElement('span');
+        const chainWord = document.createElement('span');
         const score1 = document.createElement('li');
         const score2 = document.createElement('li');
         const score3 = document.createElement('li');
@@ -45,6 +47,9 @@ class gameLogic extends HTMLElement {
 
         chainNum.innerText = '0';
         chainNum.className = 'chainNum';
+        chainWord.innerText = 'Stack';
+        chainWord.className = 'stack';
+        chainNumDiv.className = 'chainDiv';
         h4.innerText = 'Typing Game!';
         h4.className = 'title-text';
         titleDiv.className = 'title';
@@ -89,7 +94,7 @@ class gameLogic extends HTMLElement {
         leaderBoardDiv.innerHTML = '<span class="leaderBoardOpen">🏆</span>';
         leaderBoardDiv.className = 'leaderBoard';
         gameSceneDiv.className = 'gameScene';
-        gameSceneDiv.append(chainNum, titleDiv, logicDiv, leaderBoardDiv, leaderBoardScoreDiv);
+        gameSceneDiv.append(chainNumDiv, chainNum, chainWord, titleDiv, logicDiv, leaderBoardDiv, leaderBoardScoreDiv);
         this.appendChild(gameSceneDiv);
     }
 }
@@ -108,7 +113,7 @@ document.addEventListener('submit', (e) => {
         const formDatas = new FormData(signInForm);
         const loginBody = new URLSearchParams(formDatas);
 
-        fetch(`http://localhost:8080/confirm`, {
+        fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/confirm`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -144,7 +149,7 @@ document.addEventListener('submit', (e) => {
         const formDatass = new FormData(signUpForm);
         const signUpBody = new URLSearchParams(formDatass);
 
-        fetch(`http://localhost:8080/create`, {
+        fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

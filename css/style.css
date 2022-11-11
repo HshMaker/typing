@@ -238,6 +238,104 @@ body {
     }
 }
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-end {
+    0% {
+        transform: rotate(0deg);
+        border-top: 12px solid rgb(255, 70, 70);
+    }
+    14.3% {
+        border-top: 12px solid rgb(255, 190, 69);
+    }
+    28.6% {
+        border-top: 12px solid rgb(255, 255, 68);
+
+    }
+    42.9% {
+        border-top: 12px solid rgb(40, 124, 40);
+    }
+    57.2% {
+        border-top: 12px solid rgb(74, 74, 255);
+
+    }
+    71.5% {
+        border-top: 12px solid rgb(91, 45, 123);
+
+    }
+    85.8% {
+        border-top: 12px solid rgb(136, 43, 136);
+
+    }
+    100% {
+        transform: rotate(360deg);
+        border-top: 12px solid rgb(255, 70, 70);
+    }
+}
+
+.chainDiv {
+    animation: spin 2s linear infinite;
+    position: fixed;
+    margin-top: 230px;
+    margin-left: 60px;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(193, 255, 198);
+    border: 12px solid rgb(62, 240, 86);
+    border-top: 12px solid rgb(0, 197, 26);
+    border-radius: 50%;
+}
+.chain-blue {
+    background-color: rgb(193, 247, 255);
+    border: 12px solid rgb(62, 210, 240);
+    border-top: 12px solid rgb(0, 154, 197);
+}
+.chain-red {
+    background-color: rgb(255, 193, 193);
+    border: 12px solid rgb(240, 118, 62);
+    border-top: 12px solid rgb(197, 30, 0);
+}
+.chain-end {
+    animation: spin-end 2s linear infinite;
+    position: fixed;
+    margin-top: 230px;
+    margin-left: 60px;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(244, 249, 249);
+    border: 12px solid rgba(204, 255, 0, 0.5);
+    border-top: 12px solid rgb(197, 30, 0);
+    border-radius: 50%;
+}
+
+.chainNum {
+    position: fixed;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-top: 240px;
+    margin-left: 72px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 73px;
+    
+}
+.stack {
+    position: fixed;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin-top: 263px;
+    margin-left: 72px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 73px;
+
+}
+
 .hide {
     display: none;
 }

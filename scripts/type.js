@@ -8,6 +8,7 @@ const leaderOpen = document.querySelector('.leaderBoardOpen');
 const leaderContainer = document.querySelector('.leaderContainer');
 const leaderExit = document.querySelector('.leaderExit');
 const chainNumSpan = document.querySelector('.chainNum');
+const chainDivColor = document.querySelector('.chainDiv');
 const leaderBoardv = [
     document.querySelector('.leader1'),
     document.querySelector('.leader2'),
@@ -53,7 +54,7 @@ setTimeout(function () {
 , 50)
 
 function getWords() {
-    fetch(`http://localhost:8080/words`)
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/words`)
         .then((response) => response.json())
         .then((data) => {
             typeValue = data;
@@ -114,7 +115,7 @@ async function correctValue() {
         }, 100);
         scoreData = new FormData(scoreForm);
         scoreBody = new URLSearchParams(scoreData);
-        await fetch(`http://localhost:8080/chainzero`, {
+        await fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/chainzero`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -124,12 +125,13 @@ async function correctValue() {
             .then((response) => response.json())
             .then((data) => {
                 chainNumSpan.innerText = data.chain;
+                chainDivColor.className = 'chainDiv';
             });
     }
 }
 
 function getValue() {
-    fetch(`http://localhost:8080/score`, {
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/score`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -140,10 +142,19 @@ function getValue() {
         .then((data) => {
             scoreText.innerText = data.score;
             chainNumSpan.innerText = data.chain;
+            if(data.chain <= 9) {
+                return;
+            } else if(data.chain <= 39) {
+                chainDivColor.classList.add('chain-blue');
+            } else if(data.chain <= 149) {
+                chainDivColor.classList.add('chain-red');
+            } else {
+                chainDivColor.classList.add('chain-end');
+            }
         });
 }
 function scoreLoad() {
-    fetch(`http://localhost:8080/loadscore`, {
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/loadscore`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -154,10 +165,19 @@ function scoreLoad() {
             .then((data) => {
                 scoreText.innerText = data.score;
                 chainNumSpan.innerText = data.chain;
+                if(data.chain <= 9) {
+                    return;
+                } else if(data.chain <= 39) {
+                    chainDivColor.classList.add('chain-blue');
+                } else if(data.chain <= 149) {
+                    chainDivColor.classList.add('chain-red');
+                } else {
+                    chainDivColor.classList.add('chain-end');
+                }
             })
 }
 function leaderBoardLoad() {
-    fetch(`http://localhost:8080/leaderBoard`)
+    fetch(`https://port-1-typingback-v1cot24la7q6id3.gksl2.cloudtype.app/leaderBoard`)
             .then((response) => response.json())
             .then((data) => {
                 for(i = 0; i<leaderBoardv.length; i++) {
