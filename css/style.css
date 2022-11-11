@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GothicA1-Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/GothicA1-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
 body {
     background-color: rgb(253, 255, 223);
     margin: 0;
@@ -114,6 +127,7 @@ body {
 }
 
 .logic :nth-child(1) {
+    font-family: 'MICEGothic Bold';
     margin-top: -40px;
     margin-bottom: -25px;
     font-size: 50px;
@@ -137,6 +151,7 @@ body {
 }
 
 #score {
+    font-family: 'MICEGothic Bold';
     text-align: center;
     margin-top: 30px;
     font-size: 100px;
@@ -277,9 +292,9 @@ body {
 }
 
 .chainDiv {
-    animation: spin 2s linear infinite;
+    animation: spin 4s linear infinite;
     position: fixed;
-    margin-top: 230px;
+    margin-top: 210px;
     margin-left: 60px;
     width: 80px;
     height: 80px;
@@ -299,9 +314,9 @@ body {
     border-top: 12px solid rgb(197, 30, 0);
 }
 .chain-end {
-    animation: spin-end 2s linear infinite;
+    animation: spin-end 4s linear infinite;
     position: fixed;
-    margin-top: 230px;
+    margin-top: 210px;
     margin-left: 60px;
     width: 80px;
     height: 80px;
@@ -312,11 +327,12 @@ body {
 }
 
 .chainNum {
+    font-family: 'GothicA1-Light';
     position: fixed;
     display: inline-block;
     width: 80px;
     height: 80px;
-    margin-top: 240px;
+    margin-top: 220px;
     margin-left: 72px;
     font-size: 40px;
     text-align: center;
@@ -328,7 +344,7 @@ body {
     display: inline-block;
     width: 80px;
     height: 80px;
-    margin-top: 263px;
+    margin-top: 243px;
     margin-left: 72px;
     font-size: 13px;
     text-align: center;
